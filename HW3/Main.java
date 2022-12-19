@@ -9,27 +9,27 @@ public class Main {
     public static void main(String[] args) {
 
         // Задача 1
-        // System.out.print("Введите размерность массива: ");
-        // int size = sc.nextInt();
+        System.out.print("Введите размерность массива: ");
+        int size = sc.nextInt();
 
-        // System.out.print("Введите минимальное значение: ");
-        // int min = sc.nextInt();
+        System.out.print("Введите минимальное значение: ");
+        int min = sc.nextInt();
 
-        // System.out.print("Введите максимальное значение: ");
-        // int max = sc.nextInt();
+        System.out.print("Введите максимальное значение: ");
+        int max = sc.nextInt();
 
-        // int [] arr = GetArray(size, min, max);
-        // System.out.println("Новый массив: "+Arrays.toString(arr));
-        // int len = arr.length;
-        // MergeSort(arr, len);
-        // System.out.println("Отсортированный массив: "+Arrays.toString(arr));
-        // System.out.println();
+        int [] arr = GetArray(size, min, max);
+        System.out.println("Новый массив: "+Arrays.toString(arr));
+        int len = arr.length;
+        MergeSort(arr, len);
+        System.out.println("Отсортированный массив: "+Arrays.toString(arr));
+        System.out.println();
 
         // Задача 2
-        // System.out.print("Введите размерность списка: ");
-        // int size_list = sc.nextInt();
-        // GetList(size_list);
-        // System.out.println();
+        System.out.print("Введите размерность списка: ");
+        int size_list = sc.nextInt();
+        GetList(size_list);
+        System.out.println();
 
 
         // Задача 3 - Задан целочисленный список ArrayList. Найти минимальное, максимальное и среднее из этого списка.
