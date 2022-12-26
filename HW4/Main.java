@@ -11,34 +11,34 @@ public class Main {
     public static void main(String[] args) {
 
         // Задача 1 Пусть дан LinkedList с несколькими элементами. Реализуйте метод, который вернет “перевернутый” список.
-        // List<Integer> list = GetLinkedList();
-        // ReVerseList(list);
+        List<Integer> list = GetLinkedList();
+        ReVerseList(list);
         
         // Задача 2 Реализуйте очередь с помощью LinkedList со следующими методами:
         // enqueue() - помещает элемент в конец очереди,
         // dequeue() - возвращает первый элемент из очереди и удаляет его,
         // first() - возвращает первый элемент из очереди, не удаляя.
 
-        // System.out.print("Начальная очередь: ");
-        // Deque<Integer> line = GetQueue();
+        System.out.print("Начальная очередь: ");
+        Deque<Integer> line = GetQueue();
 
-        // System.out.print("Введите какое-нибудь число: ");
-        // int num = sc.nextInt();
-        // System.out.println();
+        System.out.print("Введите какое-нибудь число: ");
+        int num = sc.nextInt();
+        System.out.println();
 
-        // System.out.println("Число "+num+ " положим в конец очереди");
-        // enqueue(num, line);
-        // System.out.println(line);
-        // System.out.println();
+        System.out.println("Число "+num+ " положим в конец очереди");
+        enqueue(num, line);
+        System.out.println(line);
+        System.out.println();
 
-        // int del = dequeue(line);
-        // System.out.println(del+" Первый элемент, который был удален");
-        // System.out.println(line);
-        // System.out.println();
+        int del = dequeue(line);
+        System.out.println(del+" Первый элемент, который был удален");
+        System.out.println(line);
+        System.out.println();
 
-        // int first = first(line);
-        // System.out.println("Теперь первый элемент очереди = "+first+", он удален не будет: ");
-        // System.out.println(line);
+        int first = first(line);
+        System.out.println("Теперь первый элемент очереди = "+first+", он удален не будет: ");
+        System.out.println(line);
 
         /*
          *  3. В калькулятор добавьте возможность отменить последнюю операцию.
@@ -111,56 +111,92 @@ public class Main {
      * Метод для калькулятора 
      */
     private static void Callculator(){
-        Deque<Object> line = new LinkedList<>();
+        Deque<Double> line = new LinkedList<>();
         boolean esc = false;
         while (esc != true) {
-            Object num1 = GetDigit();
-            Object num2 = GetDigit();
-            Object rez = Result(num1, num2);
+            Double num1;
+
+            if (line.size() >= 1){
+                num1 = line.peekLast();
+            }else{
+                num1 = GetDigit();
+            }
+            
+            char symbol = GetSymbol();
+            Double num2 = GetDigit();
+            Double result = 0.0;
+            if (symbol == '+'){
+                result = Summa(num1, num2);
+            }else if (symbol == '-'){
+                result = Differ(num1, num2);
+            }else if (symbol == '*'){
+                result = Multi(num1, num2);
+            }else if (symbol == '/'){
+                result = Division(num1, num2);
+            }else{
+                System.out.println("Ошибка, операция не определена: ");
+            }
+            
             if (line.size() == 3){
                 line.pollFirst();
             }
-            line.addLast(rez);
-            System.out.println("Результат: "+line.peekLast());
-            System.out.println("Напишите 'esc' для выхода, 'canc' - для возврата к предудущему результату, что-угодно - для продолжения");
+            line.addLast(result);
+            System.out.println(num1+" "+symbol+" "+num2+" = "+line.peekLast());
+            System.out.println("Очередь: "+line);
+            System.out.println("Введите '1' - для работы с результатом, '2' - для ввода нового числа, '3' - для выхода, '4' - для отмены последней операции");
             String out  = sc.next();
 
-            if (out.equals("esc")) {
+            if (out.equals("2")) {
+                line.clear();
+            }
+            if (out.equals("3")) {
                 esc = true;
             }
-            if (out.equals("canc")) {
-                rez = line.pollLast();
-                System.out.println("Результат "+rez+" извлечен, прошлый результат: "+line);
+            if (out.equals("4")) {
+                result = line.pollLast();
+                System.out.println("Результат "+result+" отменен, работаем с : "+line);
             }
         }
 
     }
-    public static Object GetDigit(){
-        System.out.println("Укажите число: ");
-        Object num;
+    public static double GetDigit(){
+        System.out.print("Укажите число: ");
+        double num;
         if (sc.hasNextInt()){
             num = sc.nextInt();
         } else if (sc.hasNextDouble()) {
             num = sc.nextDouble();
         } else {
             System.out.println("Ошибка, введите число: ");
-            sc.next();
             num = GetDigit();
         }
         return num;
     }
-    static Object Result (Object a, Object b){
-        if (a instanceof Double && b instanceof Double){
-            return (Object) ((Double) a + (Double) b);
-        }else if (a instanceof Integer && b instanceof Double) {
-            return (Object) ((Integer) a + (Double) b);
-        }else if (a instanceof Integer && b instanceof Integer) {
-            return (Object) ((Integer) a + (Integer) b);
-        }else if (a instanceof Double && b instanceof Integer) {
-            return (Object) ((Double) a + (Integer) b);
-        }else{
-            return 0;
+    public static char GetSymbol(){
+        System.out.print("Введите операцию (-,+,*,/): ");
+        char symbol;
+        if (sc.hasNext()){
+            symbol = sc.next().charAt(0);
+            if (symbol != '-' && symbol != '+' && symbol != '*' && symbol != '/'){
+                System.out.println("Ошибка, неизвестная операция");
+                symbol = GetSymbol();
+            }
+        }else {
+            System.out.println("Ошибка, неизвестная операция");
+            symbol = GetSymbol();
         }
+        return symbol;
     }
-
+    private static double Summa (double a, double b){
+        return a + b;
+    }
+    private static double Differ (double a, double b){
+        return a - b;
+    }
+    private static double Multi (double a, double b){
+        return a * b;
+    }
+    private static double Division (double a, double b){
+        return a / b;
+    }
 }
