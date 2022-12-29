@@ -3,19 +3,35 @@ package HW5;
 import java.util.Arrays;
 import java.util.Scanner;
 import static HW5.Likepeople.ReadPeople;
+import static HW5.HeapSort.*;
+import HW5.Queen;
+// import static HW5.QuinsOnBoard.*;
+
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         // 1. Реализуйте структуру телефонной книги с помощью HashMap, учитывая, что 1 человек может иметь несколько телефонов.
         // PhoneGuide();
 
         // Написать программу, которая найдет и выведет повторяющиеся имена с количеством повторений. Отсортировать по убыванию популярности.
-        FindAndPrintLike();
+        // FindAndPrintLike();
 
         // 3. Реализовать алгоритм пирамидальной сортировки (HeapSort).
+        // System.out.print("Введите размерность мыссива: ");
+        // int size_arr = sc.nextInt();
+        // int array[] = GetArray(size_arr);
+        // Sort(array);
+        // System.out.println("Отсортированный массив: "+Arrays.toString(array));
+        // System.out.println();
 
         // 4. На шахматной доске расставить 8 ферзей так, чтобы они не били друг друга
+        Queen queen = new Queen();
+        System.out.println(queen);
+        // queen.backtrack(1);
     }
     private static void PhoneGuide(){
         Phoneboock book = new Phoneboock();
@@ -81,6 +97,6 @@ public class Main {
         book.AddPeople("Иван", "Ежов");
 
         ReadPeople();
-        
     }
 }
+

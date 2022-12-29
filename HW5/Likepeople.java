@@ -1,10 +1,8 @@
 package HW5;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Likepeople {
@@ -18,21 +16,26 @@ public class Likepeople {
             value.add(lastname);
             People.put(name, value);
         }
-        // System.out.println(People);
     }
 
     public static void ReadPeople(){
-        // Map<String, Integer> sortMap = new LinkedHashMap<>();
-        // int max  = 1;
-        // for (int value : People.values()) {
+        Map<String, Integer> sortMap = new LinkedHashMap<>();
+        int max = 0;
+        for (var item : People.entrySet()) {
+            if (item.getValue().size() > max) {
+                max = item.getValue().size();
+            }    
+        }
+        System.out.println(People);
+        
+        for (int i = max; i > 1; i--){
+            for (var item : People.entrySet()) {
+                if (item.getValue().size() == i){
+                    sortMap.put(item.getKey(), item.getValue().size());
+                }
+            }
             
-        // }
-        // for (var item : People.entrySet()) {
-        //     if (item.getValue().size() > 1){
-        //         System.out.printf("[%s]: [%s]\n", item.getKey(), item.getValue().size());
-        //     }
-            
-        // }
-        // System.out.println(People.values());
+        }
+        System.out.println(sortMap);
     }
 }
