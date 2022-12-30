@@ -42,7 +42,7 @@ public class Laptop {
     public int getid() {
         return id;
     }
-    public String name() {
+    public String getname() {
         return name;
     }
     public int getram() {
@@ -57,7 +57,7 @@ public class Laptop {
     public String getos() {
         return os;
     }
-    public String color() {
+    public String getcolor() {
         return color;
     }
     public String toString(){
