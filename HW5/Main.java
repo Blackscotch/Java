@@ -29,11 +29,7 @@ public class Main {
         // System.out.println();
 
         // 4. На шахматной доске расставить 8 ферзей так, чтобы они не били друг друга
-        PrintBoard();
-        
-        
-        
-        
+        ChessBoard(); 
     }
     private static void PhoneGuide(){
         Phoneboock book = new Phoneboock();
@@ -100,21 +96,10 @@ public class Main {
 
         ReadPeople();
     }
-
-    private static String[][] GetBoard(){
-        String[][] board = new String[8][8];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                if (i == 0){
-                    board[i][j] = "| |";
-                }else{
-                    board[i][j] = " |";
-                }
-            }
-        }
-        return board;
-    }
-    private static void PrintBoard(){
+    /**
+     * Метод для шахмат
+     */
+    public static void ChessBoard(){
         Queen queen = new Queen();
         queen.GetQueens(0);
     }

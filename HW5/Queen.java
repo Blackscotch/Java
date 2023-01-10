@@ -1,5 +1,6 @@
 package HW5;
 
+import java.text.BreakIterator;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -46,36 +47,19 @@ public class Queen {
             lrud[i] = 0;
         }
             
-
         queen = new int[len];
     }
  
     public void GetQueens(int i) {
-        // Бегаем по строкам
         if (i > 7) {
-            for (int y = 0; y < 8; y++) {
-                for (int x = 0; x < 8; x++) {
-                    if (y == 0) {
-                        if(queen[y] == x) {
-                            System.out.print("|Q|");
-                        } else {
-                            System.out.print("| |");
-                        }
-                    }else{
-                        if(queen[y] == x) {
-                            System.out.print("Q|");
-                        } else {
-                            System.out.print(" |");
-                        }
-                    }
-                    
-                }
-                System.out.println();
-            }
+            PrintQueens();
+            System.out.println("Введите 1 - для показа следующего варианта, 0 - для выхода из программы.");
+            int elstry = sc.nextInt();
+            if (elstry == 0) {
+                System.exit(elstry);
+            }   
         }else{    
-            
             for (int j = 0; j < len; j++) {
-                
                 if ((col[j] == 0) && (rlud[i+j] == 0) && (lrud[i-j+len] == 0)) {
                     queen[i] = j;
                     col[j] = 1; rlud[i+j] = 1; lrud[i-j+len] = 1;
@@ -83,16 +67,32 @@ public class Queen {
                     col[j] = 0; rlud[i+j] = 0; lrud[i-j+len] = 0;
                 }
             }
-        }
-        
-        
+        }    
     }
- 
-    
- 
-    public static void main(String[] args) {
-        Queen queen = new Queen();
-        queen.GetQueens(0);
+    /**
+     * Распечатка варианта решения
+     */
+    public void PrintQueens(){
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                if (x == 0) {
+                    if(queen[y] == x) {
+                        System.out.print("|Q|");
+                    } else {
+                        System.out.print("| |");
+                    }
+                }else{
+                    if(queen[y] == x) {
+                        System.out.print("Q|");
+                    } else {
+                        System.out.print(" |");
+                    }
+                }
+                
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
     
 }
